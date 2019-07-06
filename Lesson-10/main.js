@@ -1,21 +1,21 @@
 // класс-родитель
 function Animal(name) {
     this.name = name;
-    this.foodAmount = 50;
+    this._foodAmount = 50;
 }
 // методы родителя
-Animal.prototype.formatFoodAmount = function() {
-    return this.foodAmount + 'гр.';
+Animal.prototype._formatFoodAmount = function() {
+    return this._foodAmount + 'гр.';
 };
 
 Animal.prototype.dailyNorm = function(amount) {
-    if (!arguments.length) return this.formatFoodAmount();
+    if (!arguments.length) return this._formatFoodAmount();
 
     if (amount < 50 || amount > 500) {
         return 'Недопустимое количество корма.';
     }
 
-    this.foodAmount = amount;
+    this._foodAmount = amount;
 };
 
 Animal.prototype.feed = function() {
@@ -34,6 +34,7 @@ Cat.prototype.constructor = Cat;
 Cat.prototype.feed = function() {
     Animal.prototype.feed.apply(this);
     console.log('Кот доволен ^_^');
+    return this;
 };
 
 Cat.prototype.stroke = function () {
@@ -42,4 +43,4 @@ Cat.prototype.stroke = function () {
 };
 
 var cat = new Cat('Барсик');
-cat.feed();
+console.log(cat.feed().stroke());
