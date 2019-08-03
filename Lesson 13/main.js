@@ -1,4 +1,7 @@
-var container = document.getElementById('container');
+localStorage.clear();
+
+var container = document.getElementById('container'),
+    button = document.getElementsByTagName('button')[0];
 
 var firstPar = document.createElement('p'),
     secondPar = document.createElement('p');
@@ -9,31 +12,31 @@ secondPar.innerHTML = 'Hello, here are <a href="http://google.by">Link 3</a> and
 container.appendChild(firstPar);
 container.appendChild(secondPar);
 
-var elem = document.getElementById('button');
-elem.addEventListener('click', changeStyle);
+button.addEventListener('click', btnClick, false);
+function btnClick() {
+    var links = firstPar.children;
 
-function changeStyle(EO) {
-
-var elems = firstPar.children;
-for (var i = 0; i < elems.length; i++) {
-	var elem = elems[i];
-	elem.style.color = 'red';
-	elem.style.fontWeight = '600';
-	}
+    for (var i = 0; i < links.length; i++) {
+        links[i].classList.add('changed');
+    }
 }
 
+secondPar.onclick = function(event) {
+    var target = event.target;
 
-var x = secondPar.children[0];
+    if (target.tagName === 'A') {
+        event.preventDefault();
 
-x.onclick = function(event) {
-var href = event.target.getAttribute('href');
-alert(href);
+        var linkInfo = localStorage.getItem(target.textContent);
 
-return false;
+        if (linkInfo) {
+        	alert(JSON.parse(linkInfo).path);
+		} else {
+			localStorage.setItem(target.textContent, JSON.stringify({ path: target.getAttribute('href') }));
+			alert('Информация о ссылке сохранена.');
+		}
+    }
 };
-
-
-
 
 
 
