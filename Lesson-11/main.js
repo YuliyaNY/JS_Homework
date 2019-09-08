@@ -1,24 +1,26 @@
-// Задание 1:
+// Задание 1: Использование перебирающего метода массивов.
 
-function filterArr(arr) {
- return arr > 0;   
+function filterArr(numbers) {
+    return numbers.filter(function(number) {
+      return number > 0;
+ });
 }
 
-var newArr = [-1, 0, 2, 34, -2];
-console.log(newArr.filter(filterArr));
+filterArr([-1, 0, 2, 34, -2]);
 
 
-// Задание 2:
+// Задание 2: Возврат первого найденного положительного числа.
 
-function positiveNumber(a,b,c) {
-	return a > 0;
+function positiveNumber(numbers) {
+    return numbers.find(function(number) {
+	return numbrer > 0;
+  });
 }
 
-var arr = [-1,5,10];
-console.log(arr.find(positiveNumber));
+positiveNumber([-1, 0, 2, 34, -2]);
 
 
-// Задание 3:
+// Задание 3: Палиндром.
 
 function isPalindrome(str) {
 	var lowStr = str.toLowerCase();
@@ -30,26 +32,15 @@ console.log(isPalindrome('шалаш'));
 console.log(isPalindrome('казак'));
 
 
-// Задание 4:
+// Задание 4: Анаграммы.
 
 function areAnagrams(word1, word2) {
-
-    if (word1.length !== word2.length) {
-        return false;
-    }
-    
-    var sortWord1 = word1.split('').sort().join('');
-    var sortWord2 = word2.split('').sort().join('');
-
-    return (sortWord1 === sortWord2);
+    return word1.toLowerCase().split('').sort().join('') === word2.toLowerCase().split('').sort().join('');
 }
 
-console.log(areAnagrams('кот', 'отк')); // true
-console.log(areAnagrams('кот', 'атк')); // false
-console.log(areAnagrams('кот', 'отко')); // false
+areAnagrams('кот', 'отк');
 
-
-// Задание 5:
+// Задание 5:  Разделение массива на под-массивы.
 
 function divideArr (arr, count) {
     var newArray = [];
